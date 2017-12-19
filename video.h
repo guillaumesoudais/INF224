@@ -10,9 +10,10 @@ private:
     int duree;
 public:
     Video();
-    Video( std::string n,  std::string pn,int d) : Objetmult(n, pn){
+    Video(const std::string &n, const std::string &pn,int d) : Objetmult(n, pn){
         this->duree= d;
     }
+    ~Video();
 
     virtual void showObj(std::ostream& os) const override {
         os << "video name: "+this->name+"\n"+"video file path: "+

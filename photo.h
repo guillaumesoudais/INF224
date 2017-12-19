@@ -13,10 +13,11 @@ private:
     long longitude;
 public:
     Photo();
-    Photo( std::string n,  std::string pn,long lat, long lon) : Objetmult(n, pn){
+    Photo( const std::string &n, const std::string &pn,long lat, long lon) : Objetmult(n, pn){
         this->latitude = lat;
         this->longitude = lon;
     }
+    ~Photo();
 
     virtual void showObj(std::ostream& os) const override {
         os << "Photo name: "+this->name+"\n"+"Photo file path: "+

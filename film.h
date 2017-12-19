@@ -12,10 +12,11 @@ private:
     int * chap_len;
 public:
     Film();
-    Film(int nb, std::string n,  std::string pn,int d) : Video(n, pn, d){
+    Film(int nb, const std::string &n, const std::string &pn,int d) : Video(n, pn, d){
         this->nb_chap= nb;
-    ~Film;
     }
+    ~Film(){delete[] this->chap_len;}
+
 
     virtual void showObj(std::ostream& os) const override {
         os <<  "There are " + std::to_string(this->nb_chap)

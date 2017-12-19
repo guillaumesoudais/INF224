@@ -5,7 +5,7 @@ using std::ostream;
 
 Objetmult::Objetmult(){}
 
-Objetmult::Objetmult( string n,  string pn){
+Objetmult::Objetmult(const string &n, const string &pn){
     this->name = n;
     this->pathname = pn;
 }
@@ -16,10 +16,10 @@ std::string Objetmult::getName() const{
 std::string Objetmult::getPathName() const{
     return this->pathname;
 }
-void Objetmult::setName( string n){
+void Objetmult::setName(const string &n){
     this->name = n;
 }
-void Objetmult::setPathName( string pn){
+void Objetmult::setPathName(const string &pn){
     this->pathname = pn;
 }
 

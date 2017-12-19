@@ -33,3 +33,13 @@ ainsi qu'on l'a déclaré.
 le tableau des chapitres. Recopier le tableau qu'il reçcoit en entrée.
   On peut passer les pointeurs en arguments en tant que const pour pas qu'il
 soit modifié.
+
+
+### 7e étape. Destruction et copie d'objets
+Il faut modifier les classes qui définissent des tableaux, car à l'appelle du
+delete le contenu ne sera pas détruit.
+Dans le cas de la copie d'objet, il se pourrait que les deux objets pointent sur
+un même tableau. Il faut donc creer un nouveau tableau qui reprend les même
+valeurs.
+
+### 8e étape. Créer des groupes
