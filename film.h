@@ -15,11 +15,12 @@ public:
     Film(int nb, const std::string &n, const std::string &pn,int d) : Video(n, pn, d){
         this->nb_chap= nb;
     }
-    ~Film(){delete[] this->chap_len;}
+    ~Film() {delete[] this->chap_len;
+            std::cout << this->name + " détruit\n";}
 
 
     virtual void showObj(std::ostream& os) const override {
-        os <<  "There are " + std::to_string(this->nb_chap)
+        os <<  "->" +this->getName()+"\nThere are " + std::to_string(this->nb_chap)
                +" chapters in this movie" << std::endl;
         for(int i =0;i < nb_chap;i++){
             os <<  "Chapter " + std::to_string(i)

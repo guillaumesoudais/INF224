@@ -17,7 +17,7 @@ public:
         this->latitude = lat;
         this->longitude = lon;
     }
-    ~Photo();
+    ~Photo(){std::cout << this->name + " détruit\n";}
 
     virtual void showObj(std::ostream& os) const override {
         os << "Photo name: "+this->name+"\n"+"Photo file path: "+

@@ -13,7 +13,7 @@ public:
     Video(const std::string &n, const std::string &pn,int d) : Objetmult(n, pn){
         this->duree= d;
     }
-    ~Video();
+    ~Video(){std::cout << this->name + " détruit\n";}
 
     virtual void showObj(std::ostream& os) const override {
         os << "video name: "+this->name+"\n"+"video file path: "+

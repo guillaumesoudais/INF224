@@ -11,7 +11,7 @@ protected:
 public:
     Objetmult(); // Constructeur sans argument.
     Objetmult(const std::string &n, const std::string &pn); // Constructeur avec arguments.
-    ~Objetmult(); // Déstructeur.
+    ~Objetmult(){std::cout << this->name + " détruit\n";} // Déstructeur.
     std::string getName() const; // Accesseur pour le nom de l'objet.
     std::string getPathName() const; // Accesseur pour le fichier associé à l'objet.
     void setName( const std::string &n) ; //Modifieur du nom de l'objet.

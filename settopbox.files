@@ -1,4 +1,6 @@
+datacenter.h
 film.h
+groupe.h
 photo.h
 video.h
 objetmult.cpp

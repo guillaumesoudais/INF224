@@ -1,0 +1,2 @@
+main.o: main.cpp objetmult.h video.h photo.h film.h groupe.h
+objetmult.o: objetmult.cpp objetmult.h
