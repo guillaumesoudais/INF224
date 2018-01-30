@@ -4,13 +4,15 @@
 #include <iostream>
 #include <string>
 #include "video.h"
+#include "datacenter.h"
+
 
 
 class Film : public Video{
+friend class DataCenter;
 private:
     int nb_chap;
     int * chap_len;
-public:
     Film();
     Film(int nb, const std::string &n, const std::string &pn,int d) : Video(n, pn, d){
         this->nb_chap= nb;
@@ -18,7 +20,7 @@ public:
     ~Film() {delete[] this->chap_len;
             std::cout << this->name + " détruit\n";}
 
-
+public:
     virtual void showObj(std::ostream& os) const override {
         os <<  "->" +this->getName()+"\nThere are " + std::to_string(this->nb_chap)
                +" chapters in this movie" << std::endl;

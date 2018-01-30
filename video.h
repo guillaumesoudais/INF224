@@ -4,17 +4,20 @@
 #include <iostream>
 #include <string>
 #include "objetmult.h"
+#include "datacenter.h"
+
 
 class Video : public Objetmult{
+friend class DataCenter;
 private:
     int duree;
-public:
     Video();
     Video(const std::string &n, const std::string &pn,int d) : Objetmult(n, pn){
         this->duree= d;
     }
     ~Video(){std::cout << this->name + " détruit\n";}
 
+public:
     virtual void showObj(std::ostream& os) const override {
         os << "video name: "+this->name+"\n"+"video file path: "+
               this->pathname+"\n"+ "video length: " +

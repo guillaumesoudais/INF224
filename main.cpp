@@ -12,6 +12,7 @@
 #include "photo.h"
 #include "film.h"
 #include "groupe.h"
+#include "datacenter.h"
 
 
 int main(int argc, char* argv[]) {
@@ -28,18 +29,21 @@ int main(int argc, char* argv[]) {
     //        sleep(1);
     //    }
     //    delete(obj_t);
-    Film *f = new Film( 3, "Chat","cuteCat.mp4",12);
-    Groupe *g = new Groupe("film_group");
+//    Film *f = new Film( 3, "Chat","cuteCat.mp4",12);
+//    Groupe *g = new Groupe("film_group");
 
-    int t[3] = {5,3,4};
-    f->setChap(t,3);
-    f->showObj(std::cout);
-    //    f->play();
-    g->displayName(std::cout);
-    g->push_front(std::make_shared<Objetmult>(*f));
-    g->push_front(std::make_shared<Objetmult>(*f));
-    g->push_front(std::make_shared<Objetmult>(*f));
+//    int t[3] = {5,3,4};
+//    f->setChap(t,3);
+//    f->showObj(std::cout);
+//        f->play();
+//    g->displayName(std::cout);
+//    g->push_front(std::make_shared<Objetmult>(*f));
+//    g->push_front(std::make_shared<Objetmult>(*f));
+//    g->push_front(std::make_shared<Objetmult>(*f));
 //    g->displayAttribute(std::cout);
-    delete g;
+//    delete g;
+
+    DataCenter * datas = new DataCenter("those sweet datas");
+
     return 0;
 }

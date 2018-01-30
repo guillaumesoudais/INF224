@@ -10,20 +10,23 @@
 #include "video.h"
 #include "photo.h"
 #include "film.h"
+#include "datacenter.h"
 
 using ObjetmultPtr = std::shared_ptr<Objetmult>;
 typedef std::shared_ptr<Objetmult> ObjetmultPtr;
 
 
 class Groupe : public std::list<ObjetmultPtr>{
+friend class DataCenter;
 private:
     std::string name;
-public:
     Groupe();
     Groupe(const std::string &n){
         this->name = n;
     }
     ~Groupe() {std::cout << this->name + " détruit\n";}
+
+public:
 
     std::string getName() const{
         return this->name;
