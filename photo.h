@@ -10,7 +10,7 @@
 
 class Photo : public Objetmult{
 friend class DataCenter;
-private:
+protected:
     long latitude;
     long longitude;
     Photo();
@@ -18,15 +18,23 @@ private:
         this->latitude = lat;
         this->longitude = lon;
     }
-    ~Photo(){std::cout << this->name + " détruit\n";}
+
 
 public:
+    ~Photo(){std::cout << this->name + " détruit\n";}
     virtual void showObj(std::ostream& os) const override {
         os << "Photo name: "+this->name+"\n"+"Photo file path: "+
               this->pathname+"\n"+ "Photo latitude and longitude: " +
               std::to_string(this->latitude) +", "+
               std::to_string(this->longitude)+"\n" << std::endl;;
     }
+    virtual std::string strshowObj() const override{
+        return ("Photo name: "+this->name+"@ "+"Photo file path: "+
+                this->pathname+"@ "+ "Photo latitude and longitude: " +
+                std::to_string(this->latitude) +", "+
+                std::to_string(this->longitude)+"\n");
+    }
+
 
     void setLatitude(long l){
         this->latitude = l;
@@ -42,7 +50,7 @@ public:
     }
 
     void play() const {
-        system(("imagej "+this->pathname + " &").c_str());
+        system(("imagej '"+this->pathname + "' &").c_str());
     }
 };
 #endif // PHOTO_H

@@ -15,55 +15,116 @@
 #include "film.h"
 #include "groupe.h"
 
-using ObjetmultPtr = std::shared_ptr<Objetmult>;
-typedef std::shared_ptr<Objetmult> ObjetmultPtr;
+#include <sstream>
+#include "tcpserver.h"
+
+using namespace std;
+using namespace cppu;
+
+using ObjetmultPtr = shared_ptr<Objetmult>;
+typedef shared_ptr<Objetmult> ObjetmultPtr;
 
 class DataCenter
 {
-private:
-    std::string name;
-    std::map<std::string  , ObjetmultPtr > objets;
-    std::map<std::string  , Groupe *> groupes;
+protected:
+    string name;
+    map<string  , ObjetmultPtr > objets;
+    map<string  , shared_ptr<Groupe>> groupes;
 public:
-    DataCenter(const std::string &n){this->name = n;}
+    DataCenter(const string &n){this->name = n;}
 
-    std::shared_ptr<Photo>  createPic(const std::string &name, const std::string &pathname,long lat, long lon){
-        std::shared_ptr<Photo> p (new Photo(name, pathname, lat, lon));
+    shared_ptr<Photo>  createPic(const string &name, const string &pathname,long lat, long lon){
+        shared_ptr<Photo> p (new Photo(name, pathname, lat, lon));
         objets[name] = p;
         return p;
     }
 
-    std::shared_ptr<Video> createVid(const std::string &name, const std::string &pathname,int d){
-        std::shared_ptr<Video> v (new Video(name,pathname, d));
+    shared_ptr<Video> createVid(const string &name, const string &pathname,int d){
+        shared_ptr<Video> v (new Video(name,pathname, d));
         objets[name] = v;
         return v;
     }
 
-    std::shared_ptr<Film> createMov(int nb, const std::string &name, const std::string &pathname,int d){
-
-         this->objets[n] = (new Film( nb, name, pathname, d));
+    shared_ptr<Film> createMov(int nb, int *chap_len,const string &name, const string &pathname,int d){
+        shared_ptr<Film> f (new Film(nb, chap_len, name,pathname, d));
+        objets[name] = f;
+        return f;
     }
-    std::shared_ptr<Groupe> createGr(const std::string &name){
-         this->groupes[n] = (new Group(name));
 
+    shared_ptr<Groupe> createGr(const string &name){
+        shared_ptr<Groupe> g (new Groupe(name));
+        groupes[name] = g;
+        return g;
+    }
 
-    ObjetmultPtr searchO(const std::string n){
+    ObjetmultPtr searchO(const string n){
         if(this->objets.count(n)!=0){
             return this->objets[n];
         }
         else return nullptr;
     }
 
-    Groupe * searchG(const std::string n){
-        if(this->groupes.count(n)!=0){
-            return groupes[n];
+    shared_ptr<Groupe> searchG(const string &name){
+        if(this->groupes.count(name)!=0){
+            return groupes[name];
         }
         else return nullptr;
     }
 
-    void play(const std::string n){
-        ObjetmultPtr * op = searchO(n);
+    void play(const string &name){
+        ObjetmultPtr op = searchO(name);
         if(op != nullptr) op->play();
+    }
+    void showObj(const string &name){
+        ObjetmultPtr op = searchO(name);
+        if(op != nullptr) op->showObj(std::cerr);
+    }
+    string strshowObj(const string &name){
+        ObjetmultPtr op = searchO(name);
+        if(op != nullptr) return(op->strshowObj());
+        return "";
+    }
+
+
+    bool processRequest(TCPConnection& cnx, const string& request, string& response)
+    {
+      cerr << "\nRequest: '" << request << "'" << endl;
+      stringstream ss;
+      ss << request;
+
+      // 1) pour decouper la requête:
+      // on peut par exemple utiliser stringstream et getline()
+        string c;
+        string obj;
+
+
+      getline(ss, c, ' ');
+      getline(ss, obj, ' ');
+      // 2) faire le traitement:
+      // - si le traitement modifie les donnees inclure: TCPLock lock(cnx, true);
+      // - sinon juste: TCPLock lock(cnx);
+      if(c=="play"){
+          play(obj);
+          cerr<<obj<<"lu"<<endl;
+      }
+      if (c=="look"){
+            response = strshowObj(obj);
+            showObj(obj);
+            cerr<<obj<<"montré"<<endl;
+      }
+      if (c=="quit"){
+            cerr<<false<<endl;
+      }
+
+      // 3) retourner la reponse au client:
+      // - pour l'instant ca retourne juste OK suivi de la requête
+      // - pour retourner quelque chose de plus utile on peut appeler la methode print()
+      //   des objets ou des groupes en lui passant en argument un stringstream
+      // - attention, la requête NE DOIT PAS contenir les caractères \n ou \r car
+      //   ils servent à délimiter les messages entre le serveur et le client
+
+      // renvoyer false si on veut clore la connexion avec le client
+      return true;
     }
 };
 

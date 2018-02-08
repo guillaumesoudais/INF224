@@ -1,7 +1,13 @@
+client.cpp
+cppsocket.cpp
+cppsocket.h
+datacenter.h
 datacenter.h
 film.h
 groupe.h
 photo.h
+tcpserver.cpp
+tcpserver.h
 video.h
 objetmult.cpp
 objetmult.h

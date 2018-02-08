@@ -5,6 +5,7 @@
 
 class Objetmult
 {
+friend class DataCenter;
 protected:
     std::string name; // nom de l'objet multimédia.
     std::string pathname; // nom du fichier associé à l'objet.
@@ -17,6 +18,7 @@ public:
     void setName( const std::string &n) ; //Modifieur du nom de l'objet.
     void setPathName(const std::string &pn) ; // Modifieur du fichier associé à l'objet.
     virtual void showObj(std::ostream&) const; //Affiche les variables de l'objet.
+    virtual std::string strshowObj() const;
     virtual void play() const;
 };
 

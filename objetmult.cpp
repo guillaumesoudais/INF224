@@ -24,8 +24,13 @@ void Objetmult::setPathName(const string &pn){
 }
 
 void Objetmult::showObj(ostream& os) const{
-    os << "object name: "+this->name+"\n"+"object file path: "+
+    os << "object name: "+this->name+"@"+"object file path: "+
           this->pathname+"\n" << std::endl;;
 }
+std::string Objetmult::strshowObj() const{
+    return ("object name: "+this->name+"\n"+"object file path: "+
+          this->pathname+"\n");
+}
+
 
 void Objetmult::play() const{}

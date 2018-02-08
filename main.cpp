@@ -7,43 +7,36 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <memory.h>
-#include "objetmult.h"
-#include "video.h"
-#include "photo.h"
-#include "film.h"
-#include "groupe.h"
+#include <string>
+#include <sstream>
+#include "tcpserver.h"
 #include "datacenter.h"
+#define PORT 3331
 
+using namespace std;
+using namespace cppu;
 
-int main(int argc, char* argv[]) {
-
-    std::cout << "Hello World" << std::endl;
-    //    Objetmult *obj_t[4];
-    //    obj_t[0] = new Photo("chat","./chat.jpg",700,394);
-    //    obj_t[1] = new Video("surprised cat","cuteCat.mp4",12);
-    //    obj_t[2] = new Photo("souris","/dev/null",1234,383);
-    //    obj_t[3] = new Photo("chat","./chat.jpg",5012,241);
-    //    for(int i = 0;i<4;i++){
-    //        obj_t[i]->play();
-    //        obj_t[i]->showObj(std::cout);
-    //        sleep(1);
-    //    }
-    //    delete(obj_t);
-//    Film *f = new Film( 3, "Chat","cuteCat.mp4",12);
-//    Groupe *g = new Groupe("film_group");
-
-//    int t[3] = {5,3,4};
-//    f->setChap(t,3);
-//    f->showObj(std::cout);
-//        f->play();
-//    g->displayName(std::cout);
-//    g->push_front(std::make_shared<Objetmult>(*f));
-//    g->push_front(std::make_shared<Objetmult>(*f));
-//    g->push_front(std::make_shared<Objetmult>(*f));
-//    g->displayAttribute(std::cout);
-//    delete g;
-
+int main(void) {
+    //instanciation de la base de donnée
+    int t[3] = {5,3,4};
     DataCenter * datas = new DataCenter("those sweet datas");
+    datas->createPic("photo_chat","./media/chat.jpg",5012,241);
+    datas->createMov(3, t, "Chat_mignon","./media/cuteCat.mp4",12);
 
+    //demarage du serveur
+    // cree le TCPServer
+    shared_ptr<TCPServer> serv (new TCPServer());
+    // le serveur appelera cette méthode chaque fois qu'il y a une requête
+    serv->setCallback(*datas, &DataCenter::processRequest);
+
+    // lance la boucle infinie du serveur
+    cout << "Starting Server on port " << PORT << endl;
+    int status = serv->run(PORT);
+
+    // en cas d'erreur
+    if (status < 0) {
+      cerr << "Could not start Server on port " << PORT << endl;
+      return 1;
+    }
     return 0;
 }
