@@ -1,6 +1,6 @@
 //
 //  main.cpp
-//  
+//
 
 #include <iostream>
 #include <list>
@@ -20,8 +20,17 @@ int main(void) {
     //instanciation de la base de donnée
     int t[3] = {5,3,4};
     DataCenter * datas = new DataCenter("those sweet datas");
-    datas->createPic("photo_chat","./media/chat.jpg",5012,241);
+    datas->createPic("chat","./media/chat.jpg",5012,241);
     datas->createMov(3, t, "Chat_mignon","./media/cuteCat.mp4",12);
+    datas->createVid("boulangerie","./media/boulangerie.mp4",11);
+    datas->createVid("hockey","./media/hockey.mp4",11);
+    datas->createVid("rino","./media/rino.mp4",11);
+    datas->createVid("yamakasi","./media/yamakasi.mp4",11);
+    datas->createPic("giraffe","./media/giraffe.jpg",40,20);
+    datas->createPic("fuji","./media/fuji.png",5012,241);
+
+
+
 
     //demarage du serveur
     // cree le TCPServer

@@ -24,20 +24,20 @@ public:
             std::cout << this->name + " détruit\n";}
 
     virtual void showObj(std::ostream& os) const override {
-        os <<  "->" +this->getName()+"@ There are " + std::to_string(this->nb_chap)
-               +" chapters in this movie" << std::endl;
+        os <<  "->" +this->getName()+"@ il y a " + std::to_string(this->nb_chap)
+               +" chapitres dans ce film" << std::endl;
         for(int i =0;i < nb_chap;i++){
-            os <<  "Chapter " + std::to_string(i)
+            os <<  "Chapitre " + std::to_string(i)
                    +" : "+ std::to_string(chap_len[i]) + "s"<< std::endl;
         }
         os <<  "\n" << std::endl;
     }
     virtual std::string strshowObj() const override{
-        std::string s = "->" +this->getName()+"@ There are " + std::to_string(this->nb_chap)
-                        +" chapters in this movie" ;
+        std::string s = "      ->" +this->getName()+"@il y a " + std::to_string(this->nb_chap)
+                        +" chapitres dans ce film@" ;
         for(int i =0;i < nb_chap;i++){
-                     s+="Chapter " + std::to_string(i)
-                                   +" : "+ std::to_string(chap_len[i]) + "s";
+                     s+="Chapitre " + std::to_string(i+1)
+                                   +" : "+ std::to_string(chap_len[i]) + "s@";
         }
         return (s);
     }

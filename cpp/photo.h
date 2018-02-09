@@ -29,10 +29,9 @@ public:
               std::to_string(this->longitude)+"\n" << std::endl;;
     }
     virtual std::string strshowObj() const override{
-        return ("Photo name: "+this->name+"@ "+"Photo file path: "+
-                this->pathname+"@ "+ "Photo latitude and longitude: " +
-                std::to_string(this->latitude) +", "+
-                std::to_string(this->longitude)+"\n");
+        return ("       -> "+this->name+"@"+ "latitude :" +
+        std::to_string(this->latitude) +"@longitude : " +
+                std::to_string(this->longitude))+"@";
     }
 
 

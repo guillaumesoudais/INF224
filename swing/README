@@ -1,0 +1,7 @@
+Fonctionnement:
+
+1) La fenêtre de contrôle ne se lance seulement une fois que le client est
+connecté au serveur.
+
+2) Sur la droite de la fenêtre on peut voir la liste des media disponibles,
+on peut interagir avec eux grâce aux boutons. 

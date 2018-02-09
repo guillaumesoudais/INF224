@@ -116,6 +116,17 @@ public:
 		printf("le client est parti");
             cerr<<false<<endl;
       }
+      if (c=="size"){
+            cerr<<2<<endl;
+      }
+      if (c=="list"){
+        string s = "";
+            for (map<string, ObjetmultPtr>::iterator it = objets.begin() ; it!=objets.end() ; ++it){
+            s+= it->first+" ";
+            }
+            cerr<<s<<endl;
+      }
+
 
       // 3) retourner la reponse au client:
       // - pour l'instant ca retourne juste OK suivi de la requête

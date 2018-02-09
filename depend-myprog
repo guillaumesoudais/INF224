@@ -1,5 +1,0 @@
-main.o: main.cpp tcpserver.h cppsocket.h datacenter.h objetmult.h video.h \
- photo.h film.h groupe.h
-objetmult.o: objetmult.cpp objetmult.h
-cppsocket.o: cppsocket.cpp cppsocket.h
-tcpserver.o: tcpserver.cpp tcpserver.h cppsocket.h
