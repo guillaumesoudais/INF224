@@ -1,7 +1,8 @@
 package swing;
 
 import javax.swing.*;
-import java.awt.event.*; 
+import java.awt.event.*;
+/* Classe pour les boutons envoyant la requête de déconnexion*/
 
 public class Exit_button extends AbstractAction {
 	private Client cl;
@@ -10,9 +11,9 @@ public class Exit_button extends AbstractAction {
 		super(texte);
 		cl = c;
 	}
-	 
+
 	public void actionPerformed(ActionEvent e) {
 		cl.send("quit");
 		 System.exit(0);
-		 } 
+		 }
 }
