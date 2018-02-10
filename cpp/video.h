@@ -25,9 +25,9 @@ public:
               std::to_string(this->duree) +"\n" << std::endl;;
     }
     virtual std::string strshowObj() const override{
-        return ("video name: "+this->name+"@"+"video file path: "+
-                this->pathname+"@"+ "video length: " +
-                std::to_string(this->duree) +"\n");
+        return ("      -> "+this->name+"@"+"chemin de la vidéo: "+
+                this->pathname+"@"+ "durée de la video: " +
+                std::to_string(this->duree) +"s@");
     }
 
     int getDuree() const{

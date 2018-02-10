@@ -88,7 +88,7 @@ public:
 
     bool processRequest(TCPConnection& cnx, const string& request, string& response)
     {
-      cerr << "\nRequest: '" << request << "'" << endl;
+      cout << "\nRequest: '" << request << "'" << endl;
       stringstream ss;
       ss << request;
 
@@ -103,21 +103,23 @@ public:
       // 2) faire le traitement:
       // - si le traitement modifie les donnees inclure: TCPLock lock(cnx, true);
       // - sinon juste: TCPLock lock(cnx);
+      TCPLock lock(cnx);
       if(c=="play"){
           play(obj);
-          cerr<<obj<<"lu"<<endl;
+          cout<<obj<<" lu"<<endl;
       }
       if (c=="look"){
             response = strshowObj(obj);
             showObj(obj);
-            cerr<<obj<<"montré"<<endl;
+            cout<<obj<<" montré"<<endl;
       }
       if (c=="quit"){
-		printf("le client est parti");
+	    printf("le client est parti");
             cerr<<false<<endl;
       }
       if (c=="size"){
-            cerr<<2<<endl;
+            cerr<<objets.size()<<endl;
+	    cout<<objets.size()<<endl;
       }
       if (c=="list"){
         string s = "";
@@ -125,6 +127,7 @@ public:
             s+= it->first+" ";
             }
             cerr<<s<<endl;
+	    cout<<s<<endl;
       }
 
 
